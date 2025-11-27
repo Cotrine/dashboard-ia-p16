@@ -1,0 +1,5 @@
+tienda,fecha,total,moneda,items,archivo_origen
+Compro,2023-04-18,97.6,USD,"['1', 'de', '1']",ticket-pepejeans-1.jpg
+LEVI'S STORE,2018-03-27,9.95,EUR,"[{'lista': 'GÜSTSCHRIFT', 'de': 'WERT', 'productos': ['19.95']}]",ticket-levis-1.jpg
+Nordstrom,2017-03-09,105.45,USD,"[{'lista': 'Chinook Centre', 'de': 'Nordstrom', 'productos': ['100.00']}]",ticket-nordstrom-1.jpg
+SUMMA PLN,2018-05-23,999,PLN,"['1', '1', '1']",ticket-massimo-duti-1.jpg
