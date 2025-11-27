@@ -21,7 +21,7 @@ if opcion == "Analizador de Sentimiento":
         if texto:
             with st.spinner("La RTX 2000 está pensando..."):
                 try:
-                    res = requests.post("http://http://127.0.0.1:8000/analizar", json={"texto": texto})
+                    res = requests.post(f"{URL_API}/analizar", json={"texto": texto})
                     datos = res.json()
                     sentimiento = datos['analisis'] # Ojo: Asegúrate de usar la clave correcta
                     
@@ -34,7 +34,7 @@ if opcion == "Analizador de Sentimiento":
                         st.info(f"Resultado: {sentimiento}")
                         
                 except Exception as e:
-                    st.error(f"Error de conexión: {e}")
+                    st.error(f"Errorr de conexión: {e}")
 
 # --- OPCIÓN 2: EL CHATBOT (Lo Nuevo) ---
 elif opcion == "Chatbot General":
