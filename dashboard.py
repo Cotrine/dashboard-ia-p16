@@ -12,7 +12,7 @@ opcion = st.sidebar.radio("Elige una función:", ["Analizador de Sentimiento", "
 
 # --- OPCIÓN 1: EL ANALIZADOR (Lo que ya tenías) ---
 if opcion == "Analizador de Sentimiento":
-    st.header("📊 Analizador de Opiniones")
+    st.header("📊 Aanalizador de Opiniones")
     st.write("Detecta si un comentario es Positivo o Negativo.")
     
     texto = st.text_area("Ingresa el comentario:")
