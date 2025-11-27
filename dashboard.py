@@ -21,7 +21,7 @@ if opcion == "Analizador de Sentimiento":
         if texto:
             with st.spinner("La RTX 2000 está pensando..."):
                 try:
-                    res = requests.post("http://127.0.0.1:8000/analizar", json={"texto": texto})
+                    res = requests.post("http://{URL_API}/analizar", json={"texto": texto})
                     datos = res.json()
                     sentimiento = datos['analisis'] # Ojo: Asegúrate de usar la clave correcta
                     
