@@ -21,7 +21,7 @@ if opcion == "Analizador de Sentimiento":
         if texto:
             with st.spinner("La RTX 2000 está pensando..."):
                 try:
-                    res = requests.post("http://{URL_API}/analizar", json={"texto": texto})
+                    res = requests.post("http://http://127.0.0.1:8000/analizar", json={"texto": texto})
                     datos = res.json()
                     sentimiento = datos['analisis'] # Ojo: Asegúrate de usar la clave correcta
                     
@@ -48,7 +48,7 @@ elif opcion == "Chatbot General":
             with st.spinner("Escribiendo..."):
                 try:
                     # Llamamos a la NUEVA ventanilla /chat
-                    res = requests.post("http://127.0.0.1:8000/chat", json={"pregunta": pregunta})
+                    res = requests.post(f"{URL_API}/chat", json={"pregunta": pregunta})
                     datos = res.json()
                     st.markdown(f"**🤖 IA:** {datos['respuesta_ia']}")
                 except Exception as e:
@@ -60,7 +60,7 @@ elif opcion == "Ver Historial":
     
     if st.button("Cargar Datos"):
         try:
-            res = requests.get("http://127.0.0.1:8000/historial")
+            res = requests.get(f"{URL_API}/historial")
             df = pd.DataFrame(res.json())
             st.dataframe(df)
             
@@ -93,7 +93,7 @@ elif opcion == "Resumidor de PDFs":
             with st.spinner("Leyendo y analizando..."):
                 try:
                     # Enviamos el texto extraído a tu API
-                    res = requests.post("http://127.0.0.1:8000/resumir", json={"texto_largo": texto_completo})
+                    res = requests.post(f"{URL_API}/resumir", json={"texto_largo": texto_completo})
                     
                     if res.status_code == 200:
                         datos = res.json()
