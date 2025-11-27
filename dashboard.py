@@ -21,7 +21,7 @@ if opcion == "Analizador de Sentimiento":
         if texto:
             with st.spinner("La RTX 2000 está pensando..."):
                 try:
-                    res = requests.post("https://uninhibited-guardlike-stuart.ngrok-free.dev/analizar", json={"texto": texto})
+                    res = requests.post("https://uninhibited-guardlike-stuart.ngrok-free.dev", json={"texto": texto})
                     datos = res.json()
                     sentimiento = datos['analisis'] # Ojo: Asegúrate de usar la clave correcta
                     
@@ -48,7 +48,7 @@ elif opcion == "Chatbot General":
             with st.spinner("Escribiendo..."):
                 try:
                     # Llamamos a la NUEVA ventanilla /chat
-                    res = requests.post("https://uninhibited-guardlike-stuart.ngrok-free.dev/chat", json={"pregunta": pregunta})
+                    res = requests.post("https://uninhibited-guardlike-stuart.ngrok-free.dev", json={"pregunta": pregunta})
                     datos = res.json()
                     st.markdown(f"**🤖 IA:** {datos['respuesta_ia']}")
                 except Exception as e:
@@ -60,7 +60,7 @@ elif opcion == "Ver Historial":
     
     if st.button("Cargar Datos"):
         try:
-            res = requests.get("https://uninhibited-guardlike-stuart.ngrok-free.dev/historial")
+            res = requests.get("https://uninhibited-guardlike-stuart.ngrok-free.dev")
             df = pd.DataFrame(res.json())
             st.dataframe(df)
             
@@ -93,7 +93,7 @@ elif opcion == "Resumidor de PDFs":
             with st.spinner("Leyendo y analizando..."):
                 try:
                     # Enviamos el texto extraído a tu API
-                    res = requests.post("https://uninhibited-guardlike-stuart.ngrok-free.dev/resumir", json={"texto_largo": texto_completo})
+                    res = requests.post("https://uninhibited-guardlike-stuart.ngrok-free.dev", json={"texto_largo": texto_completo})
                     
                     if res.status_code == 200:
                         datos = res.json()
