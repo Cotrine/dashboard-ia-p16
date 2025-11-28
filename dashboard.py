@@ -150,3 +150,30 @@ elif opcion == "Segmentación de Clientes":
                     st.pyplot(fig)
                     
             st.info("💡 Interpretación de Negocio: Mira qué grupo gasta más y enfoca tu marketing ahí.")
+elif opcion == "Transcriptor de Audio":
+    st.header("🎧 Transcriptor Inteligente (Whisper)")
+    st.write("Sube un audio (mp3, wav, m4a) y la IA lo convertirá en texto.")
+    
+    archivo_audio = st.file_uploader("Sube tu audio aquí", type=["mp3", "wav", "m4a"])
+    
+    if archivo_audio is not None:
+        st.audio(archivo_audio)
+        
+        if st.button("Transcribir Audio"):
+            with st.spinner("Escuchando... (Esto usa la GPU intensamente)"):
+                try:
+                    # Preparamos el archivo
+                    files = {"file": (archivo_audio.name, archivo_audio, archivo_audio.type)}
+                    
+                    # Llamamos a la API
+                    res = requests.post(f"{URL_API}/transcribir", files=files)
+                    
+                    if res.status_code == 200:
+                        texto = res.json()['transcripcion']
+                        st.success("¡Transcripción Completada!")
+                        st.text_area("Resultado:", value=texto, height=200)
+                    else:
+                        st.error("Error en el servidor al procesar el audio.")
+                        
+                except Exception as e:
+                    st.error(f"Error de conexión: {e}")
