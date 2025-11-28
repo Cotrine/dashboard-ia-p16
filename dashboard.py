@@ -8,7 +8,7 @@ st.set_page_config(page_title="Super IA P16", page_icon="🧠", layout="wide")
 
 # --- BARRA LATERAL (MENU) ---
 st.sidebar.title("🔧 Herramientas")
-opcion = st.sidebar.radio("Elige una función:", ["Analizador de Sentimiento", "Chatbot General", "Ver Historial","Resumidor de PDFs", "Segmentación de Clientes","transcripcion"])
+opcion = st.sidebar.radio("Elige una función:", ["Analizador de Sentimiento", "Chatbot General", "Ver Historial","Resumidor de PDFs", "Segmentación de Clientes","Transcriptor de Audio"])
 
 # --- OPCIÓN 1: EL ANALIZADOR (Lo que ya tenías) ---
 if opcion == "Analizador de Sentimiento":
