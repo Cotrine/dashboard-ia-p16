@@ -166,7 +166,7 @@ elif opcion == "Transcriptor de Audio":
                     files = {"file": (archivo_audio.name, archivo_audio, archivo_audio.type)}
                     
                     # Llamamos a la API
-                    res = requests.post(f"{URL_API}/transcribir", files=files)
+                    res = requests.post("https://uninhibited-guardlike-stuart.ngrok-free.dev/transcribir", files=files)
                     
                     if res.status_code == 200:
                         texto = res.json()['transcripcion']
