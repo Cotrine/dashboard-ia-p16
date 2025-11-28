@@ -3,9 +3,14 @@ from pydantic import BaseModel
 import ollama
 import sqlite3
 import datetime
-
+import whisper
+import shutil
+import os
+from fastapi import UploadFile, File
 app = FastAPI()
-
+print("👂 Cargando modelo Whisper...")
+# 'base' es rápido. Si quieres más precisión usa 'small' o 'medium' (pero consume más RAM)
+modelo_whisper = whisper.load_model("base")
 # --- CONFIGURACIÓN DE BASE DE DATOS ---
 def init_db():
     conexion = sqlite3.connect("historial.db")
@@ -93,3 +98,21 @@ def resumir_documento(datos: PeticionResumen):
     
     resumen = respuesta['message']['content']
     return {"resumen_ia": resumen}
+# --- NUEVA VENTANILLA: TRANSCRIPCIÓN ---
+@app.post("/transcribir")
+def transcribir_audio(file: UploadFile = File(...)):
+    # 1. Guardar el archivo temporalmente en el disco
+    nombre_archivo = f"temp_{file.filename}"
+    with open(nombre_archivo, "wb") as buffer:
+        shutil.copyfileobj(file.file, buffer)
+
+    print(f"   🎧 Procesando audio: {nombre_archivo}...")
+
+    # 2. La IA escucha (Usará tu GPU si está disponible)
+    resultado = modelo_whisper.transcribe(nombre_archivo)
+    texto_transcrito = resultado["text"]
+
+    # 3. Borramos el archivo temporal (limpieza)
+    os.remove(nombre_archivo)
+
+    return {"transcripcion": texto_transcrito}
